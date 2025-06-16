@@ -38,12 +38,6 @@ async function sendMessage() {
         ]
       })
     });
-    /*
-    Implementar:
-    Un lenguaje no tecnico
-    No emita diagnosticos ni gestionar emergencias
-    Tener en cuenta que los usuarios en su mayoria son huerfanas
-    */
 
     const data = await response.json();
     const reply = data.choices?.[0]?.message?.content || "Sin respuesta.";
@@ -102,3 +96,26 @@ function actualizarContador() {
   const contador = document.getElementById('contadorCaracteres');
   contador.textContent = `${textarea.value.length} / 300`;
 }
+
+const saludos = [
+  "Bienvenida. Estoy para apoyarte.",
+  "Hola. Puedes usar este espacio para consultar tus dudas.",
+  "Gracias por ingresar. Estoy disponible si necesitas información o apoyo.",
+  "Hola. Este es un lugar seguro para que consultes lo que necesites.",
+  "Bienvenida. Aquí puedes encontrar información útil sobre varios temas.",
+  "Hola. Estoy aquí para ayudarte de manera clara y respetuosa.",
+  "Hola. Si hay algo que te interese saber, puedes escribirlo con confianza.",
+  "Bienvenida. Puedes iniciar escribiendo el tema o la pregunta que deseas consultar.",
+  "Hola. Puedes contar con este espacio para orientarte.",
+  "Gracias por entrar. Estoy para ayudarte en lo que necesites saber.",
+  "Hola. Puedes hacer tu consulta cuando lo desees.",
+  "Bienvenida. Estoy preparada para responder tus preguntas.",
+  "Hola. Estoy para brindarte apoyo de forma clara y segura.",
+  "Bienvenida. Puedes comenzar escribiendo lo que necesitas saber.",
+  "Hola. Estoy aquí para brindarte información cuando la necesites."
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+  const saludoAleatorio = saludos[Math.floor(Math.random() * saludos.length)];
+  document.getElementById('response').innerHTML = `<p>${saludoAleatorio}</p>`;
+});
