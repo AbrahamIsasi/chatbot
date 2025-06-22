@@ -6,18 +6,14 @@ body, html {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.05rem;
-  color: #fff;
-  background: 
-    linear-gradient(to right, rgba(0,8,29,0.9) 23.8%, rgba(0,28,29,0.12) 96.1%);
+  color: #f8f9fa; /* texto claro para fondo más oscuro */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 69, 0, 0.95) 0%,       /* rojo fuego intenso */
+    rgba(180, 180, 180, 1) 70%,      /* gris claro apagado */
+    rgba(0, 150, 199, 0.95) 100%     /* azul hielo intenso */
+  );
   background-attachment: fixed;
-}
-
-/* ============================= */
-/* Logo Netflix */
-/* ============================= */
-.logo img {
-  width: 180px;
-  height: auto;
 }
 
 /* Contenedor de encabezado (logo + título) */
@@ -127,4 +123,155 @@ button:hover {
 /* ============================= */
 p.text-muted {
   color: #ffffff !important;
+}
+
+#modulos .modulo img {
+  max-width: 160px; /* 30% más pequeño que 200px */
+  height: auto;
+  transition: transform 0.2s ease;
+}
+
+#modulos .modulo img:hover {
+  transform: scale(1.05);
+}
+
+/*
+Menú desplegable
+*/
+
+/* Estado inicial del panel y botón */
+.side-panel {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100%;
+  background-color: #343a40;
+  color: white;
+  transition: left 0.3s ease;
+  z-index: 1050;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+body.panel-abierto .side-panel {
+  left: 0;
+}
+
+.toggle-panel-btn {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  font-size: 18px;
+  padding: 8px 12px;
+  cursor: pointer;
+  z-index: 1060;
+  transition: left 0.3s ease;
+}
+
+body.panel-abierto .toggle-panel-btn {
+  left: 260px;
+}
+
+/* Overlay oscuro */
+.side-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1040;
+}
+
+.hidden {
+  display: none;
+}
+
+/* En móviles */
+@media (max-width: 768px) {
+  .toggle-panel-btn {
+    top: 10px;
+    left: 10px;
+    transform: none;
+    border-radius: 5px;
+  }
+
+  body.panel-abierto .toggle-panel-btn {
+    left: 270px;
+  }
+}
+
+/* Título del panel lateral más pequeño */
+.side-panel h4 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+/* Estilo de módulos */
+.side-panel .modulo {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Reducción del tamaño de las imágenes al 70% */
+.side-panel .modulo img {
+  width: 70%;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.side-panel .modulo img:hover {
+  transform: scale(1.05);
+}
+
+/* Texto del módulo como enlace */
+.side-panel .modulo p {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* Evita que la clase .toggle-panel-btn herede el estilo del botón rojo */
+.toggle-panel-btn {
+  all: unset; /* Reinicia herencia de estilos */
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background-color: #0d6efd; /* azul original o el color que desees */
+  color: white;
+  border-radius: 0 5px 5px 0;
+  font-size: 18px;
+  padding: 8px 12px;
+  cursor: pointer;
+  z-index: 1060;
+  transition: left 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+/* En móviles */
+@media (max-width: 768px) {
+  .toggle-panel-btn {
+    top: 10px;
+    left: 10px;
+    transform: none;
+    border-radius: 5px;
+    background-color: #0d6efd;
+  }
+
+  body.panel-abierto .toggle-panel-btn {
+    left: 270px;
+  }
 }

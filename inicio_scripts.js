@@ -1,8 +1,9 @@
+// Función principal del proyecto
+
 async function sendMessage() {
   const input = document.getElementById('userInput').value;
-  const button = document.querySelector('button');
-  
-  // Desactivar botón y cambiar texto
+  const button = document.getElementById('enviarBtn'); // ← Ya no usa querySelector
+
   button.disabled = true;
   button.textContent = "Procesando...";
 
@@ -50,7 +51,6 @@ async function sendMessage() {
     document.getElementById('response').textContent = "Error al procesar la solicitud.";
     console.error(error);
   } finally {
-    // Restaurar botón
     button.disabled = false;
     button.textContent = "Enviar";
   }
@@ -97,6 +97,8 @@ function actualizarContador() {
   contador.textContent = `${textarea.value.length} / 300`;
 }
 
+// Saludos de ingreso o recarga
+
 const saludos = [
   "Bienvenida. Estoy para apoyarte.",
   "Hola. Puedes usar este espacio para consultar tus dudas.",
@@ -119,3 +121,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const saludoAleatorio = saludos[Math.floor(Math.random() * saludos.length)];
   document.getElementById('response').innerHTML = `<p>${saludoAleatorio}</p>`;
 });
+
+// Menú desplegable
+
+const sidePanel = document.getElementById('sidePanel');
+const toggleBtn = document.getElementById('toggleBtn');
+const overlay = document.getElementById('sideOverlay');
+
+function togglePanel(forceClose = false) {
+  const isOpen = document.body.classList.contains('panel-abierto');
+
+  if (forceClose || isOpen) {
+    document.body.classList.remove('panel-abierto');
+    overlay.classList.add('hidden');
+    toggleBtn.innerHTML = '→';
+  } else {
+    document.body.classList.add('panel-abierto');
+    overlay.classList.remove('hidden');
+    toggleBtn.innerHTML = '←';
+  }
+}
+
+// Click al botón
+toggleBtn.addEventListener('click', () => togglePanel());
+
+// Click fuera del panel (overlay)
+overlay.addEventListener('click', () => togglePanel(true));
