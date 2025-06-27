@@ -8,11 +8,10 @@ async function sendMessage() {
   button.textContent = "Procesando...";
 
   try {
-    const response = await fetch("https://api.deepseek.com/v1/chat/completions", {
+    const response = await fetch("/api/proxy.php", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer sk-525c3e8176914a559d22577ef1accc99"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         model: "deepseek-chat",
